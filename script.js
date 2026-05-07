@@ -1,4 +1,4 @@
-document.getElementById("form-agendamento").addEventListener("submit", function(e) {
+ document.getElementById("navbar__cta").addEventListener("submit", function(e) {
   e.preventDefault();
   alert("Consulta agendada com sucesso!");
 });

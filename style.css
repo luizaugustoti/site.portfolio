@@ -64,7 +64,7 @@ body {
 
 .navbar--scrolled {
   box-shadow: 0 4px 12px rgba(250, 3, 3, 0.15);
-  background-color: #df29f0;
+  background-color: #9bcbf0;
   transition: all 0.3s ease;
 }
 
@@ -107,7 +107,7 @@ body {
 
 .navbar__links a:hover { color: #1a5fa8; }
 
-.navbar__cta {
+#navbar__cta {
   background: #2a9d6e;
   color: #fff;
   border: none;

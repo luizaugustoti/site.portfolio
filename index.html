@@ -22,7 +22,7 @@
     <div class="navbar__container">
 
       <!-- Logo SVG inline — não depende de arquivo externo -->
-      <a href="#https://luizaugustoti.github.io/site.medico" class="navbar__logo">
+      <a href="index.html" class="navbar__logo">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
           <circle cx="16" cy="16" r="16" fill="#1a5fa8"/>
           <rect x="14" y="7" width="4" height="18" rx="2" fill="white"/>
@@ -38,8 +38,15 @@
         <li><a href="#depoimentos">Depoimentos</a></li>
       </ul>
 
+      <a href="#agendamento" target="Agendamento">
+        <button id="navbar__cta">Agende sua Consulta</button>
+      </a>
 
-      <button class="navbar__cta">Agende sua Consulta</button>
+
+      
+
+
+      
 
       <!-- Botão hamburguer — só aparece no mobile -->
       <button class="navbar__hamburguer" id="hamburguer" aria-label="Abrir menu">
@@ -166,24 +173,8 @@
     </div>
   </footer>
 
-  <script>
-    const hamburguer = document.getElementById('hamburguer');
-    const menu = document.querySelector('.navbar__links');
 
-    hamburguer.addEventListener('click', function() {
-      menu.classList.toggle('navbar__links--aberto');
-      hamburguer.classList.toggle('navbar__hamburguer--ativo');
-    });
-
-    // Fecha o menu ao clicar em um link
-    document.querySelectorAll('.navbar__links a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('navbar__links--aberto');
-        hamburguer.classList.remove('navbar__hamburguer--ativo');
-      });
-    });
-  </script>
   <!-- Importa o JS -->
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
