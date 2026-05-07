@@ -1,6 +1,24 @@
- document.getElementById("navbar__cta").addEventListener("submit", function(e) {
+document.getElementById("form-agendamento").addEventListener("submit", function(e) {
+
   e.preventDefault();
-  alert("Consulta agendada com sucesso!");
+
+  // Pegando os dados do formulário
+  const nome = document.getElementById("nome").value;
+  
+
+  // Mensagem
+  alert(
+`✅ Consulta agendada com sucesso!
+
+👤 Nome: ${nome}
+
+Obrigado pela confiança!
+Em breve entraremos em contato.`
+  );
+
+  // Limpa o formulário
+  this.reset();
+
 });
 
 // Menu hamburguer
