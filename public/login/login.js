@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Evite dar console.log na senha em produção por motivos de segurança
         });
 
-        window.location.href = "../rescpção/recep.html";
+        window.location.href = "../rescepcao/recep.html";
 
         // Aqui você integraria com sua chamada de API / fetch do backend
         // exemplo: authService.login(usernameValue, passwordValue)...
