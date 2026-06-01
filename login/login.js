@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Evite dar console.log na senha em produção por motivos de segurança
         });
 
-        window.location.href = "/system/medcare_pro.html";
+        window.location.href = "../system/medcare_pro.html";
 
        
     });
