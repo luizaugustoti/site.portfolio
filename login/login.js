@@ -42,9 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Evite dar console.log na senha em produção por motivos de segurança
         });
 
-        window.location.href = "../rescepcao/recep.html";
+        window.location.href = "/login/login.html";
 
-        // Aqui você integraria com sua chamada de API / fetch do backend
-        // exemplo: authService.login(usernameValue, passwordValue)...
+       
     });
 });
