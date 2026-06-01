@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Evite dar console.log na senha em produção por motivos de segurança
         });
 
-        window.location.href = "/login/login.html";
+        window.location.href = "";
 
        
     });
