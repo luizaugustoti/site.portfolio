@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedCare Pro — Hospital System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="medcare_pro.css" />
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">
+        <div class="logo-icon">
+          <svg viewBox="0 0 16 16"><path d="M8 1a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2H9v4a1 1 0 1 1-2 0V8H3a1 1 0 0 1 0-2h4V2a1 1 0 0 1 1-1z"/></svg>
+        </div>
+        <div>
+          <div class="logo-text">MedCare Pro</div>
+          <div class="logo-sub">Hospital System</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">Clínico</div>
+    <div class="nav-item active" onclick="showModule('dashboard',this)"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></div>
+    <div class="nav-item" onclick="showModule('agenda',this)"><i class="ti ti-calendar"></i><span>Agenda</span><span class="nav-badge">18</span></div>
+    <div class="nav-item" onclick="showModule('pacientes',this)"><i class="ti ti-users"></i><span>Pacientes</span></div>
+    <div class="nav-item" onclick="showModule('prontuarios',this)"><i class="ti ti-clipboard-list"></i><span>Prontuários</span></div>
+
+    <div class="sidebar-section">Hospital</div>
+    <div class="nav-item" onclick="showModule('internacoes',this)"><i class="ti ti-bed"></i><span>Internações</span><span class="nav-badge alert">3</span></div>
+    <div class="nav-item" onclick="showModule('exames',this)"><i class="ti ti-microscope"></i><span>Exames &amp; Lab</span></div>
+    <div class="nav-item" onclick="showModule('prescricoes',this)"><i class="ti ti-pill"></i><span>Prescrições</span></div>
+    <div class="nav-item" onclick="showModule('estoque',this)"><i class="ti ti-package"></i><span>Estoque</span><span class="nav-badge alert">2</span></div>
+
+    <div class="sidebar-section">Gestão</div>
+    <div class="nav-item" onclick="showModule('financeiro',this)"><i class="ti ti-chart-bar"></i><span>Financeiro</span></div>
+    <div class="nav-item" onclick="showModule('equipe',this)"><i class="ti ti-stethoscope"></i><span>Equipe Médica</span></div>
+    <div class="nav-item" onclick="showModule('relatorios',this)"><i class="ti ti-report"></i><span>Relatórios</span></div>
+    <div class="nav-item" onclick="showModule('config',this)"><i class="ti ti-settings"></i><span>Configurações</span></div>
+
+    <div class="sidebar-bottom">
+      <div class="nav-item"><i class="ti ti-user-circle"></i><span>Dr. Rafael Lima</span></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="module-title">Dashboard</div>
+      <div class="search-box"><i class="ti ti-search"></i>Buscar...</div>
+      <div class="topbar-date" id="top-date"></div>
+      <i class="ti ti-bell" style="font-size:17px;color:var(--text-muted);cursor:pointer"></i>
+      <div class="topbar-avatar">RL</div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="module active" id="mod-dashboard">
+        <div class="alerts">
+          <div class="alert-item danger"><i class="ti ti-alert-circle"></i><div><b>Leito 4B</b> — paciente aguarda resultado laboratorial urgente (2h)</div></div>
+          <div class="alert-item warn"><i class="ti ti-package"></i><div><b>Estoque crítico</b> — Dipirona 500mg e Amoxicilina 500mg abaixo do mínimo</div></div>
+          <div class="alert-item info"><i class="ti ti-calendar"></i><div><b>7 consultas</b> agendadas para hoje — próxima às 09:30 com João Menezes</div></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-card"><div class="metric-label">Pacientes Hoje</div><div class="metric-val" style="color:#0F6E56">47</div><div class="metric-delta delta-up"><i class="ti ti-trending-up"></i>+12% vs ontem</div></div>
+          <div class="metric-card"><div class="metric-label">Leitos Ocupados</div><div class="metric-val" style="color:#185FA5">18<span style="font-size:14px;color:var(--text-muted)">/24</span></div><div class="metric-delta" style="color:var(--text-muted)">75% de ocupação</div></div>
+          <div class="metric-card"><div class="metric-label">Exames Pendentes</div><div class="metric-val" style="color:#BA7517">12</div><div class="metric-delta delta-down"><i class="ti ti-alert-triangle"></i>3 urgentes</div></div>
+          <div class="metric-card"><div class="metric-label">Receita do Dia</div><div class="metric-val" style="color:#0F6E56">R$8,4k</div><div class="metric-delta delta-up"><i class="ti ti-trending-up"></i>+5% vs meta</div></div>
+        </div>
+        <div class="section-row">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Consultas de Hoje</span><span class="card-action">Ver todas</span></div>
+            <table class="mini-table">
+              <thead><tr><th>Paciente</th><th>Hora</th><th>Médico</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>João Menezes</td><td style="font-family:var(--mono)">09:30</td><td>Dr. Lima</td><td><span class="status-pill pill-green">Confirmado</span></td></tr>
+                <tr><td>Ana Ferreira</td><td style="font-family:var(--mono)">10:00</td><td>Dra. Souza</td><td><span class="status-pill pill-amber">Aguardando</span></td></tr>
+                <tr><td>Pedro Costa</td><td style="font-family:var(--mono)">10:30</td><td>Dr. Lima</td><td><span class="status-pill pill-blue">Em consulta</span></td></tr>
+                <tr><td>Maria Oliveira</td><td style="font-family:var(--mono)">11:00</td><td>Dr. Rocha</td><td><span class="status-pill pill-gray">Agendado</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Atendimentos — semana</span></div>
+            <div class="bar-chart">
+              <div class="bar-wrap"><div class="bar" style="height:45px"></div><span class="bar-label">Seg</span><span class="bar-val">32</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:60px"></div><span class="bar-label">Ter</span><span class="bar-val">43</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:38px"></div><span class="bar-label">Qua</span><span class="bar-val">27</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:55px"></div><span class="bar-label">Qui</span><span class="bar-val">39</span></div>
+              <div class="bar-wrap"><div class="bar today" style="height:65px"></div><span class="bar-label">Sex</span><span class="bar-val">47</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:30px"></div><span class="bar-label">Sáb</span><span class="bar-val">21</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENDA -->
+      <div class="module" id="mod-agenda">
+        <div class="section-row">
+          <div class="card" style="grid-column:span 2">
+            <div class="card-header"><span class="card-title">Agenda — Maio 2025</span><span class="card-action">+ Nova consulta</span></div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center">
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Dom</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Seg</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Ter</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Qua</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Qui</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Sex</div>
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);padding-bottom:6px">Sáb</div>
+              <div></div><!-- offset: maio começa na 6ª -->
+              <div id="calendar-days" style="display:contents"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:0">
+          <div class="card-header"><span class="card-title">Consultas de Hoje — 9 de Maio</span></div>
+          <div class="schedule-slot" style="background:#EAF3DE">
+            <span class="slot-time">09:30</span><div class="slot-bar" style="background:#1D9E75"></div>
+            <div><div class="slot-name">João Menezes</div><div class="slot-type">Cardiologia · Dr. Lima</div></div>
+            <span class="status-pill pill-green" style="margin-left:auto">Confirmado</span>
+          </div>
+          <div class="schedule-slot">
+            <span class="slot-time">10:00</span><div class="slot-bar" style="background:#EF9F27"></div>
+            <div><div class="slot-name">Ana Ferreira</div><div class="slot-type">Clínica Geral · Dra. Souza</div></div>
+            <span class="status-pill pill-amber" style="margin-left:auto">Aguardando</span>
+          </div>
+          <div class="schedule-slot">
+            <span class="slot-time">10:30</span><div class="slot-bar" style="background:#378ADD"></div>
+            <div><div class="slot-name">Pedro Costa</div><div class="slot-type">Ortopedia · Dr. Lima</div></div>
+            <span class="status-pill pill-blue" style="margin-left:auto">Em consulta</span>
+          </div>
+          <div class="schedule-slot">
+            <span class="slot-time">11:00</span><div class="slot-bar" style="background:#888780"></div>
+            <div><div class="slot-name">Maria Oliveira</div><div class="slot-type">Pediatria · Dr. Rocha</div></div>
+            <span class="status-pill pill-gray" style="margin-left:auto">Agendado</span>
+          </div>
+          <div class="schedule-slot">
+            <span class="slot-time">14:30</span><div class="slot-bar" style="background:#888780"></div>
+            <div><div class="slot-name">Carlos Santos</div><div class="slot-type">Cardiologia · Dr. Lima</div></div>
+            <span class="status-pill pill-gray" style="margin-left:auto">Agendado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACIENTES -->
+      <div class="module" id="mod-pacientes">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Pacientes Cadastrados</span><span class="card-action">+ Novo paciente</span></div>
+          <div style="display:flex;gap:8px;margin-bottom:14px">
+            <input class="rx-input" style="flex:1" placeholder="Buscar por nome, CPF ou convênio..." />
+            <select class="rx-input" style="width:140px"><option>Todos</option><option>Unimed</option><option>Bradesco</option><option>Particular</option></select>
+          </div>
+          <div>
+            <div class="patient-row"><div class="pat-avatar">JM</div><div class="pat-info"><div class="pat-name">João Menezes</div><div class="pat-meta">42 anos · CPF 341.234.123-10 · Unimed</div></div><span class="status-pill pill-green">Ativo</span></div>
+            <div class="patient-row"><div class="pat-avatar">AF</div><div class="pat-info"><div class="pat-name">Ana Ferreira</div><div class="pat-meta">35 anos · CPF 567.891.234-00 · Bradesco</div></div><span class="status-pill pill-green">Ativo</span></div>
+            <div class="patient-row"><div class="pat-avatar">PC</div><div class="pat-info"><div class="pat-name">Pedro Costa</div><div class="pat-meta">58 anos · CPF 789.012.345-11 · Particular</div></div><span class="status-pill pill-blue">Internado</span></div>
+            <div class="patient-row"><div class="pat-avatar">MO</div><div class="pat-info"><div class="pat-name">Maria Oliveira</div><div class="pat-meta">29 anos · CPF 012.345.678-22 · SUS</div></div><span class="status-pill pill-green">Ativo</span></div>
+            <div class="patient-row"><div class="pat-avatar">CS</div><div class="pat-info"><div class="pat-name">Carlos Santos</div><div class="pat-meta">67 anos · CPF 234.567.890-33 · Unimed</div></div><span class="status-pill pill-amber">Alta Recente</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRONTUÁRIOS -->
+      <div class="module" id="mod-prontuarios">
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-header"><span class="card-title">João Menezes — Prontuário #1042</span><span class="card-action">Editar</span></div>
+          <div style="display:flex;gap:10px;margin-bottom:14px">
+            <div class="pat-avatar" style="width:48px;height:48px;font-size:15px">JM</div>
+            <div>
+              <div style="font-size:14px;font-weight:600">João Menezes</div>
+              <div style="font-size:11px;color:var(--text-muted)">42 anos · Masculino · Tipo Sanguíneo: A+</div>
+              <div style="font-size:11px;color:var(--text-muted)">Convênio: Unimed · Cardiologista: Dr. Rafael Lima</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);margin-bottom:6px">Alergias</div><span class="status-pill pill-red">Penicilina</span> <span class="status-pill pill-red">AAS</span></div>
+            <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);margin-bottom:6px">Diagnósticos Ativos</div><span class="status-pill pill-amber">HAS</span> <span class="status-pill pill-amber">Diabetes T2</span></div>
+          </div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);margin-bottom:8px">Sinais Vitais — Última medição</div>
+          <div class="vitals-row">
+            <div class="vital-box"><div class="vital-icon" style="color:#A32D2D">♥</div><div class="vital-val" style="color:#A32D2D">78<span style="font-size:11px">bpm</span></div><div class="vital-unit">Freq. Cardíaca</div></div>
+            <div class="vital-box"><div class="vital-icon" style="color:#185FA5">↑</div><div class="vital-val" style="color:#185FA5">138<span style="font-size:9px">/90</span></div><div class="vital-unit">Pressão mmHg</div></div>
+            <div class="vital-box"><div class="vital-icon" style="color:#0F6E56">🌡</div><div class="vital-val" style="color:#0F6E56">36.8<span style="font-size:11px">°C</span></div><div class="vital-unit">Temperatura</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Histórico de Atendimentos</span></div>
+          <table class="mini-table">
+            <thead><tr><th>Data</th><th>Motivo</th><th>Médico</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td style="font-family:var(--mono)">05/05/25</td><td>Controle HAS</td><td>Dr. Lima</td><td><span class="status-pill pill-green">Alta</span></td></tr>
+              <tr><td style="font-family:var(--mono)">12/03/25</td><td>Dor no peito</td><td>Dr. Lima</td><td><span class="status-pill pill-blue">Exames sol.</span></td></tr>
+              <tr><td style="font-family:var(--mono)">08/01/25</td><td>Rotina</td><td>Dra. Souza</td><td><span class="status-pill pill-green">Alta</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- INTERNAÇÕES -->
+      <div class="module" id="mod-internacoes">
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-header"><span class="card-title">Mapa de Leitos — Ala Norte</span></div>
+          <div class="bed-grid">
+            <div class="bed bed-occ"><span class="bed-num">1A</span>J. Silva</div>
+            <div class="bed bed-occ"><span class="bed-num">1B</span>M. Costa</div>
+            <div class="bed bed-free"><span class="bed-num">1C</span>Livre</div>
+            <div class="bed bed-occ"><span class="bed-num">2A</span>P. Lima</div>
+            <div class="bed bed-res"><span class="bed-num">2B</span>Reservado</div>
+            <div class="bed bed-occ"><span class="bed-num">2C</span>A. Dias</div>
+            <div class="bed bed-maint"><span class="bed-num">3A</span>Manutenção</div>
+            <div class="bed bed-occ"><span class="bed-num">3B</span>C. Rocha</div>
+            <div class="bed bed-free"><span class="bed-num">3C</span>Livre</div>
+            <div class="bed bed-occ"><span class="bed-num">4A</span>R. Freitas</div>
+            <div class="bed bed-occ bed-res" style="background:#FCEBEB;border-color:#F7C1C1;color:#791F1F"><span class="bed-num">4B</span>⚠ Urgente</div>
+            <div class="bed bed-free"><span class="bed-num">4C</span>Livre</div>
+          </div>
+          <div class="bed-legend">
+            <div class="bl-item"><div class="bl-dot" style="background:#F09595"></div>Ocupado (8)</div>
+            <div class="bl-item"><div class="bl-dot" style="background:#97C459"></div>Livre (3)</div>
+            <div class="bl-item"><div class="bl-dot" style="background:#B4B2A9"></div>Manutenção (1)</div>
+            <div class="bl-item"><div class="bl-dot" style="background:#EF9F27"></div>Reservado (1)</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Pacientes Internados</span></div>
+          <table class="mini-table">
+            <thead><tr><th>Paciente</th><th>Leito</th><th>Diagnóstico</th><th>Entrada</th><th>Responsável</th></tr></thead>
+            <tbody>
+              <tr><td>João Silva</td><td style="font-family:var(--mono)">1A</td><td>Pneumonia</td><td style="font-family:var(--mono)">05/05</td><td>Dr. Lima</td></tr>
+              <tr><td>Maria Costa</td><td style="font-family:var(--mono)">1B</td><td>Pós-cirúrgico</td><td style="font-family:var(--mono)">07/05</td><td>Dra. Souza</td></tr>
+              <tr><td>Carlos Rocha</td><td style="font-family:var(--mono)">3B</td><td style="color:#A32D2D;font-weight:500">IAM ⚠</td><td style="font-family:var(--mono)">09/05</td><td>Dr. Lima</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EXAMES -->
+      <div class="module" id="mod-exames">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Exames &amp; Laboratório</span><span class="card-action">+ Solicitar exame</span></div>
+          <table class="mini-table">
+            <thead><tr><th>Paciente</th><th>Exame</th><th>Solicitado</th><th>Status</th><th>Laudo</th></tr></thead>
+            <tbody>
+              <tr><td>J. Menezes</td><td>ECG + Holter</td><td style="font-family:var(--mono)">08/05</td><td><span class="status-pill pill-green">Concluído</span></td><td><span style="color:var(--brand);font-size:11px;cursor:pointer"><i class="ti ti-download"></i> PDF</span></td></tr>
+              <tr><td>A. Ferreira</td><td>Hemograma Completo</td><td style="font-family:var(--mono)">09/05</td><td><span class="status-pill pill-amber">Em análise</span></td><td>—</td></tr>
+              <tr><td>C. Rocha</td><td>Troponina Urgente</td><td style="font-family:var(--mono)">09/05</td><td><span class="status-pill pill-red">Urgente</span></td><td>—</td></tr>
+              <tr><td>P. Costa</td><td>RX Tórax</td><td style="font-family:var(--mono)">07/05</td><td><span class="status-pill pill-green">Concluído</span></td><td><span style="color:var(--brand);font-size:11px;cursor:pointer"><i class="ti ti-download"></i> PDF</span></td></tr>
+              <tr><td>M. Oliveira</td><td>Glicemia de Jejum</td><td style="font-family:var(--mono)">09/05</td><td><span class="status-pill pill-blue">Coletado</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRESCRIÇÕES -->
+      <div class="module" id="mod-prescricoes">
+        <div class="section-row">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Prescrições Recentes</span></div>
+            <table class="mini-table">
+              <thead><tr><th>Paciente</th><th>Medicamento</th><th>Dose</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>J. Menezes</td><td>Enalapril</td><td>10mg 2x/d</td><td><span class="status-pill pill-green">Ativa</span></td></tr>
+                <tr><td>M. Costa</td><td>Morfina</td><td>5mg IV</td><td><span class="status-pill pill-blue">Hospitalar</span></td></tr>
+                <tr><td>A. Ferreira</td><td>Metformina</td><td>850mg 2x/d</td><td><span class="status-pill pill-green">Ativa</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Nova Prescrição</span></div>
+            <div class="rx-form" style="background:transparent;border:none;padding:0">
+              <label>Paciente</label>
+              <select class="rx-input"><option>João Menezes</option><option>Ana Ferreira</option><option>Pedro Costa</option></select>
+              <label>Medicamento</label>
+              <input class="rx-input" placeholder="Ex: Enalapril 10mg" />
+              <div class="rx-row">
+                <div><label>Dose</label><input class="rx-input" placeholder="Ex: 10mg" /></div>
+                <div><label>Frequência</label><select class="rx-input"><option>1x/dia</option><option>2x/dia</option><option>3x/dia</option><option>Contínuo IV</option></select></div>
+              </div>
+              <label>Observações</label>
+              <textarea class="rx-input" rows="2" placeholder="Instruções especiais..."></textarea>
+              <button class="btn-primary"><i class="ti ti-pill" aria-hidden="true"></i>Emitir Receita</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESTOQUE -->
+      <div class="module" id="mod-estoque">
+        <div class="metric-row" style="grid-template-columns:repeat(3,1fr)">
+          <div class="metric-card"><div class="metric-label">Total de Itens</div><div class="metric-val">148</div></div>
+          <div class="metric-card"><div class="metric-label">Estoque Crítico</div><div class="metric-val" style="color:#A32D2D">2</div></div>
+          <div class="metric-card"><div class="metric-label">Vencendo em 30d</div><div class="metric-val" style="color:#BA7517">5</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Medicamentos — Controle de Estoque</span><span class="card-action">+ Entrada de estoque</span></div>
+          <div class="stock-item">
+            <div class="stock-name">Dipirona 500mg <span class="status-pill pill-red" style="margin-left:6px">Crítico</span></div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-crit" style="width:15%"></div></div>
+            <div class="stock-qty">12 un</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-name">Amoxicilina 500mg <span class="status-pill pill-red" style="margin-left:6px">Crítico</span></div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-crit" style="width:20%"></div></div>
+            <div class="stock-qty">18 un</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-name">Omeprazol 20mg <span class="status-pill pill-amber" style="margin-left:6px">Baixo</span></div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-low" style="width:35%"></div></div>
+            <div class="stock-qty">45 un</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-name">Enalapril 10mg</div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-ok" style="width:78%"></div></div>
+            <div class="stock-qty">210 un</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-name">Metformina 850mg</div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-ok" style="width:65%"></div></div>
+            <div class="stock-qty">180 un</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-name">Soro Fisiológico 500ml</div>
+            <div class="stock-bar-wrap"><div class="stock-bar bar-ok" style="width:90%"></div></div>
+            <div class="stock-qty">320 un</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCEIRO -->
+      <div class="module" id="mod-financeiro">
+        <div class="fin-summary">
+          <div class="fin-card green"><div class="fin-label">Receita — Maio</div><div class="fin-val">R$ 142.800</div></div>
+          <div class="fin-card red"><div class="fin-label">Despesas — Maio</div><div class="fin-val">R$ 89.400</div></div>
+          <div class="fin-card blue"><div class="fin-label">Lucro Líquido</div><div class="fin-val">R$ 53.400</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Últimos Lançamentos</span><span class="card-action">+ Novo lançamento</span></div>
+          <table class="mini-table">
+            <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Valor</th><th>Tipo</th></tr></thead>
+            <tbody>
+              <tr><td style="font-family:var(--mono)">09/05</td><td>Consultas do dia</td><td>Receita Clínica</td><td style="color:#3B6D11;font-family:var(--mono)">+R$8.400</td><td><span class="status-pill pill-green">Entrada</span></td></tr>
+              <tr><td style="font-family:var(--mono)">08/05</td><td>Faturamento Unimed</td><td>Convênio</td><td style="color:#3B6D11;font-family:var(--mono)">+R$22.500</td><td><span class="status-pill pill-green">Entrada</span></td></tr>
+              <tr><td style="font-family:var(--mono)">08/05</td><td>Compra de medicamentos</td><td>Estoque</td><td style="color:#A32D2D;font-family:var(--mono)">-R$4.200</td><td><span class="status-pill pill-red">Saída</span></td></tr>
+              <tr><td style="font-family:var(--mono)">07/05</td><td>Folha de pagamento</td><td>RH</td><td style="color:#A32D2D;font-family:var(--mono)">-R$31.000</td><td><span class="status-pill pill-red">Saída</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EQUIPE -->
+      <div class="module" id="mod-equipe">
+        <div class="section-row">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Médicos</span><span class="card-action">+ Cadastrar</span></div>
+            <div class="doctor-card"><div class="doc-avatar">RL</div><div class="doc-info"><div class="doc-name">Dr. Rafael Lima</div><div class="doc-spec">Cardiologia · CRM 12345-SP</div></div><div class="doc-status"><span class="dot-on"></span>Plantão</div></div>
+            <div class="doctor-card"><div class="doc-avatar">AS</div><div class="doc-info"><div class="doc-name">Dra. Amanda Souza</div><div class="doc-spec">Clínica Geral · CRM 67890-SP</div></div><div class="doc-status"><span class="dot-on"></span>Atendendo</div></div>
+            <div class="doctor-card"><div class="doc-avatar">MR</div><div class="doc-info"><div class="doc-name">Dr. Marcos Rocha</div><div class="doc-spec">Pediatria · CRM 11223-SP</div></div><div class="doc-status"><span class="dot-off"></span>Folga</div></div>
+            <div class="doctor-card"><div class="doc-avatar">FP</div><div class="doc-info"><div class="doc-name">Dra. Fernanda Pires</div><div class="doc-spec">Ortopedia · CRM 44556-SP</div></div><div class="doc-status"><span class="dot-on"></span>Cirurgia</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Plantão Hoje</span></div>
+            <table class="mini-table">
+              <thead><tr><th>Médico</th><th>Turno</th><th>Setor</th></tr></thead>
+              <tbody>
+                <tr><td>Dr. Lima</td><td style="font-family:var(--mono)">07h–19h</td><td>Cardiologia</td></tr>
+                <tr><td>Dra. Souza</td><td style="font-family:var(--mono)">07h–13h</td><td>Clínica Geral</td></tr>
+                <tr><td>Dra. Pires</td><td style="font-family:var(--mono)">10h–22h</td><td>Cirurgia</td></tr>
+                <tr><td>Dr. Mendes*</td><td style="font-family:var(--mono)">19h–07h</td><td>Emergência</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATÓRIOS -->
+      <div class="module" id="mod-relatorios">
+        <div class="metric-row">
+          <div class="metric-card"><div class="metric-label">NPS Pacientes</div><div class="metric-val" style="color:#0F6E56">87</div><div class="metric-delta delta-up">+3 vs mês anterior</div></div>
+          <div class="metric-card"><div class="metric-label">Taxa Ocupação</div><div class="metric-val" style="color:#185FA5">75%</div><div class="metric-delta" style="color:var(--text-muted)">18/24 leitos</div></div>
+          <div class="metric-card"><div class="metric-label">Tempo médio consulta</div><div class="metric-val">24<span style="font-size:14px">min</span></div><div class="metric-delta delta-up">-2min otimizado</div></div>
+          <div class="metric-card"><div class="metric-label">Faturamento/dia</div><div class="metric-val" style="color:#0F6E56">R$8,4k</div><div class="metric-delta delta-up">+5% meta</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Exportar Relatórios</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-primary" style="background:#185FA5"><i class="ti ti-table-export" aria-hidden="true"></i>Exportar XLS</button>
+            <button class="btn-primary"><i class="ti ti-file-type-pdf" aria-hidden="true"></i>Exportar PDF</button>
+            <button class="btn-primary" style="background:#633806"><i class="ti ti-report-medical" aria-hidden="true"></i>Gerar TISS</button>
+          </div>
+          <div style="margin-top:16px">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(--text-muted);margin-bottom:10px">Atendimentos por Especialidade — Maio</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:10px"><span style="font-size:12px;min-width:110px">Cardiologia</span><div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden"><div style="height:100%;width:62%;background:#0F6E56;border-radius:5px"></div></div><span style="font-size:11px;font-family:var(--mono);color:var(--text-muted);min-width:28px;text-align:right">186</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="font-size:12px;min-width:110px">Clínica Geral</span><div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden"><div style="height:100%;width:48%;background:#185FA5;border-radius:5px"></div></div><span style="font-size:11px;font-family:var(--mono);color:var(--text-muted);min-width:28px;text-align:right">144</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="font-size:12px;min-width:110px">Ortopedia</span><div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden"><div style="height:100%;width:35%;background:#BA7517;border-radius:5px"></div></div><span style="font-size:11px;font-family:var(--mono);color:var(--text-muted);min-width:28px;text-align:right">105</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="font-size:12px;min-width:110px">Pediatria</span><div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden"><div style="height:100%;width:28%;background:#7F77DD;border-radius:5px"></div></div><span style="font-size:11px;font-family:var(--mono);color:var(--text-muted);min-width:28px;text-align:right">84</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIGURAÇÕES -->
+      <div class="module" id="mod-config">
+        <div class="section-row">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Dados da Clínica</span></div>
+            <label class="rx-form" style="background:transparent;border:none;padding:0;display:block">
+              <span style="font-size:11px;color:var(--text-muted);font-weight:500;display:block;margin-bottom:4px">Nome da instituição</span>
+              <input class="rx-input" value="Hospital MedCare São Paulo" />
+              <span style="font-size:11px;color:var(--text-muted);font-weight:500;display:block;margin-top:10px;margin-bottom:4px">CNPJ</span>
+              <input class="rx-input" value="12.345.678/0001-99" />
+              <span style="font-size:11px;color:var(--text-muted);font-weight:500;display:block;margin-top:10px;margin-bottom:4px">Código CNES</span>
+              <input class="rx-input" value="2345678" />
+              <button class="btn-primary" style="margin-top:12px"><i class="ti ti-device-floppy" aria-hidden="true"></i>Salvar</button>
+            </label>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Usuários &amp; Permissões</span></div>
+            <table class="mini-table">
+              <thead><tr><th>Usuário</th><th>Perfil</th><th>Acesso</th></tr></thead>
+              <tbody>
+                <tr><td>Dr. Rafael Lima</td><td><span class="status-pill pill-blue">Admin</span></td><td><span class="status-pill pill-green">Ativo</span></td></tr>
+                <tr><td>Dra. Amanda Souza</td><td><span class="status-pill pill-amber">Médico</span></td><td><span class="status-pill pill-green">Ativo</span></td></tr>
+                <tr><td>Carla Mendes</td><td><span class="status-pill pill-gray">Recepção</span></td><td><span class="status-pill pill-green">Ativo</span></td></tr>
+                <tr><td>Roberto Alves</td><td><span class="status-pill pill-gray">Financeiro</span></td><td><span class="status-pill pill-green">Ativo</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="medcare_pro.js"></script>
+</body>
+</html>
