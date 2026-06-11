@@ -11,7 +11,7 @@
   --accent: #c8ff00;
   --accent2: #ff4d6d;
   --text: #e8e8f0;
-  --muted: #6e6e88;
+  --muted: #b7f707;
   --border: rgba(200, 255, 0, 0.15);
   --mono: 'Space Mono', monospace;
   --display: 'Syne', sans-serif;
@@ -424,7 +424,7 @@ h1.hero-title em {
   font-family: var(--display);
   font-size: 3.5rem;
   font-weight: 800;
-  color: var(--surface2);
+  color: var(--muted);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
