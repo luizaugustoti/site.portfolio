@@ -1,10 +1,53 @@
 /* ============================================
    PORTFÓLIO — main.js
-   Interatividade: scroll reveal + formulário
+   Interatividade: scroll reveal + formulário + menu hambúrguer
    ============================================ */
 
-// ── SCROLL REVEAL ──
+// ── MENU HAMBÚRGUER ──
 document.addEventListener('DOMContentLoaded', () => {
+
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+  const navOverlay = document.querySelector('.nav-overlay');
+
+  function openMenu() {
+    hamburger.classList.add('active');
+    navLinks.classList.add('open');
+    navOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('open');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+  }
+
+  if (navOverlay) {
+    navOverlay.addEventListener('click', closeMenu);
+  }
+
+  // Fecha ao clicar em um link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Fecha com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // ── SCROLL REVEAL ──
   const reveals = document.querySelectorAll('.reveal');
 
   const observer = new IntersectionObserver(
